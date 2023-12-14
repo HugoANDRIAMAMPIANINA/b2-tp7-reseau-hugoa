@@ -1,0 +1,20 @@
+import asyncio
+import websockets
+
+async def async_input(websocket):
+    message = input()
+    await websocket.send(message)
+        
+async def async_receive(websocket):
+    server_response = await websocket.recv()
+    print(f"{server_response}")
+    
+
+async def main():
+    uri = "ws://localhost:8765"
+    websocket = websockets.connect(uri)
+    tasks = [ async_input(websocket), async_receive(websocket) ]
+    await asyncio.gather(*tasks)
+    
+if __name__ == "__main__":
+    asyncio.run(main())
