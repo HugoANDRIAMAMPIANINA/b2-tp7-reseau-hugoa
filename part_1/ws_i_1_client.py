@@ -2,12 +2,14 @@ import asyncio
 import websockets
 
 async def async_input(websocket):
-    message = input()
-    await websocket.send(message)
+    while True:
+        message = input()
+        await websocket.send(message)
         
 async def async_receive(websocket):
-    server_response = await websocket.recv()
-    print(f"{server_response}")
+    while True:
+        server_response = await websocket.recv()
+        print(f"{server_response}")
     
 
 async def main():
