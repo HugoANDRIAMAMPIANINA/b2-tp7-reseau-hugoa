@@ -1,9 +1,12 @@
 import asyncio
+from aioconsole import ainput
 import websockets
 
 async def async_input(websocket):
     while True:
-        message = input()
+        message = await ainput()
+        if message == "":
+            continue
         await websocket.send(message)
         
 async def async_receive(websocket):
