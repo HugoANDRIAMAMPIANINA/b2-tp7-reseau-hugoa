@@ -10,6 +10,7 @@ async def handle_message(websocket):
 
 async def main():
     async with websockets.serve(handle_message, "localhost", 8765):
+        print("Serving on localhost:8765")
         await asyncio.Future()
 
 if __name__ == "__main__":

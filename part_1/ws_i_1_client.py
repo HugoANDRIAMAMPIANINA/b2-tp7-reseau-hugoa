@@ -12,9 +12,9 @@ async def async_receive(websocket):
 
 async def main():
     uri = "ws://localhost:8765"
-    websocket = websockets.connect(uri)
-    tasks = [ async_input(websocket), async_receive(websocket) ]
-    await asyncio.gather(*tasks)
+    async with websockets.connect(uri) as websocket:
+        tasks = [ async_input(websocket), async_receive(websocket) ]
+        await asyncio.gather(*tasks)
     
 if __name__ == "__main__":
     asyncio.run(main())
